@@ -5,20 +5,33 @@
  */
 
 import { assert } from 'is-any-type'
-import { NodeDiskStorageOptions, NodeDiskStorage } from '../types'
 import * as store from '../utils/storage'
 import { validatorKey, sizeValidator, validatorKeyVal } from '../utils/validator'
 
+interface NodeDiskStorageOptions {
+	readonly minSize?: number
+	readonly maxSize?: number
+	readonly compress?: boolean
+}
+
+interface NodeDiskStorage {
+	set(key: string, value: string): boolean | undefined
+	get(key: string): string | undefined
+	remove(key: string): boolean | undefined
+	clear(): boolean | undefined
+	keys(): string[] | undefined
+}
+
 export class NDS implements NodeDiskStorage {
-	protected minSize: number = 1
-	protected maxSize: number = 26
-	protected compress: boolean = false
+	protected minSize: number
+	protected maxSize: number
+	protected compress: boolean
 	protected items: Record<string, any>[] = []
 
-	constructor(options: Readonly<NodeDiskStorageOptions>) {
-		this.minSize = options.minSize
-		this.maxSize = options.maxSize
-		this.compress = options.compress
+	constructor(options: Partial<NodeDiskStorageOptions> = {}) {
+		this.minSize = (options.minSize as number) || 1
+		this.maxSize = (options.maxSize as number) || 26
+		this.compress = (options.compress as boolean) || false
 	}
 
 	/**
@@ -26,10 +39,9 @@ export class NDS implements NodeDiskStorage {
 	 *
 	 * @param { String } input - required
 	 * @param { string } value - required
-	 * @param { string } ttl - optional
 	 * @return boolean | undefined
 	 */
-	set(key: string, value: string, ttl?: string): boolean | undefined {
+	set(key: string, value: string): boolean | undefined {
 		if (validatorKeyVal({ key, value })) {
 			const options = {
 				minSize: this.minSize,
@@ -38,8 +50,8 @@ export class NDS implements NodeDiskStorage {
 			}
 
 			if (sizeValidator(options, value)) {
-				this.items.push({ key, value, ttl })
-				return store.setItem(this.items)
+				this.items.push({ key, value })
+				return store.setItem(this.items, options.compress)
 			}
 		}
 	}
@@ -52,7 +64,7 @@ export class NDS implements NodeDiskStorage {
 	 */
 	get(key: string): string | undefined {
 		if (assert.isBoolean(validatorKey(key))) {
-			return store.getItem(key)
+			return store.getItem(key, this.compress)
 		}
 	}
 
@@ -83,6 +95,6 @@ export class NDS implements NodeDiskStorage {
 	 * @return boolean | undefined
 	 */
 	keys(): string[] | undefined {
-		return store.keysItem()
+		return store.keysItem(this.compress)
 	}
 }

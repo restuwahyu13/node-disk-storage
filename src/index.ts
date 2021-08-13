@@ -4,4 +4,4 @@
  * MIT Licensed
  */
 
-export { NodeDiskStorage } from './lib'
+export { NDS as NodeDiskStorage } from './lib'

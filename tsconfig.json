@@ -1,6 +1,6 @@
 {
 	"compilerOptions": {
-		"outDir": "config",
+		"outDir": "dist",
 		"target": "ESNext",
 		"module": "UMD",
 		"moduleResolution": "Node",
@@ -18,5 +18,5 @@
 		"typeRoots": ["node_modules/@types"]
 	},
 	"include": ["src/**/*.ts"],
-	"exclude": ["node_modules", "config", "__test__/**/*.{test.ts,spec.ts}", "coverage", ".github"]
+	"exclude": ["node_modules", "dist", "__test__/**/*.{test.ts,spec.ts}", "coverage", ".github"]
 }

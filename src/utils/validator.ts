@@ -5,10 +5,16 @@
  */
 
 import { assert } from 'is-any-type'
+import zlib from 'zlib'
 import reqSize from 'human-size'
 import { next } from '../utils/next'
 import { TempStorageError } from '../utils/error'
-import { NodeDiskStorageOptions } from '../types/index'
+
+interface NodeDiskStorageOptions {
+	minSize: number
+	maxSize: number
+	compress: boolean
+}
 
 export const validatorKeyVal = (...data: Record<string, any>[]): any => {
 	const res = data.map((v) => {
@@ -42,17 +48,21 @@ export const validatorKey = (...keys: string[]): any => {
 }
 
 export const sizeValidator = (options: NodeDiskStorageOptions, value: string): boolean | Promise<Error> => {
-	const size: number = options.minSize
-	const toJSON: string = JSON.stringify({ data: value })
+	let toJSON: string
+
+	if (!options.compress) {
+		toJSON = zlib.gzipSync(Buffer.from(JSON.stringify({ data: value }))).toString('utf-8')
+	} else {
+		toJSON = JSON.stringify({ data: value })
+	}
+
 	const bodySize: string = reqSize(toJSON.length)
 	const sizeMatch: string[] = []
 	let MB: string = ''
-
-	for (let i = size + 1; i <= options.maxSize; i++) {
+	for (let i = options.minSize + 1; i <= options.maxSize; i++) {
 		MB = i + 'MB'
 		sizeMatch.push(MB)
 	}
-
 	if (sizeMatch.length < 1) {
 		return Promise.reject(new TempStorageError('maximal size under 25 MB'))
 	} else {

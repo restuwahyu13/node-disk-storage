@@ -6,21 +6,34 @@
 
 import { assert } from 'is-any-type'
 import { NDSCore } from 'nds-core'
+import { zip, unzip } from './compress'
 const storage = new NDSCore()
 
-export const setItem = (items: Record<string, any>): boolean | undefined => {
+export const setItem = (items: Record<string, any>, compress: boolean): boolean | undefined => {
 	if (assert.isArray(items as any)) {
 		if (assert.isUndefined(storage.match() as undefined)) {
-			return storage.set(items)
+			if (compress !== false) {
+				const zp = zip(items)
+				const uz = unzip(zp)
+				return storage.set(uz)
+			} else {
+				return storage.set(items)
+			}
 		} else {
-			return storage.set(items)
+			if (compress !== false) {
+				const zp = zip(items)
+				const uz = unzip(zp)
+				return storage.set(uz)
+			} else {
+				return storage.set(items)
+			}
 		}
 	} else {
 		return undefined
 	}
 }
 
-export const getItem = (key: string): string | undefined => {
+export const getItem = (key: string, compress: boolean): string | undefined => {
 	const getItem = storage.get(key)
 	if (
 		!assert.isFunction(getItem) ||
@@ -28,7 +41,13 @@ export const getItem = (key: string): string | undefined => {
 		!assert.isNull(getItem) ||
 		!assert.isUndefined(getItem)
 	) {
-		return getItem
+		if (compress !== false) {
+			const zp = zip(getItem)
+			const uz = unzip(zp)
+			return uz
+		} else {
+			return getItem
+		}
 	} else {
 		return undefined
 	}
@@ -52,10 +71,16 @@ export const clearItem = (): boolean | undefined => {
 	}
 }
 
-export const keysItem = (): string[] | undefined => {
+export const keysItem = (compress: boolean): string[] | undefined => {
 	const allKeysItem = storage.allKeys()
 	if (assert.isArray(allKeysItem as any)) {
-		return allKeysItem
+		if (compress !== false) {
+			const zp = zip(getItem)
+			const uz = unzip(zp)
+			return uz
+		} else {
+			return allKeysItem
+		}
 	} else {
 		return []
 	}
