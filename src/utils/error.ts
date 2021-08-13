@@ -4,7 +4,6 @@
  * MIT Licensed
  */
 
-
 export class TempStorageError extends Error {
 	constructor(message: string) {
 		super(message)
