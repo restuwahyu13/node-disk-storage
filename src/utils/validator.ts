@@ -8,6 +8,7 @@ import { assert } from 'is-any-type'
 import reqSize from 'human-size'
 import { next } from '../utils/next'
 import { TempStorageError } from '../utils/error'
+import { NodeDiskStorageOptions } from '../types/index'
 
 export const validatorKeyVal = (...data: Record<string, any>[]): any => {
 	const res = data.map((v) => {
@@ -40,15 +41,14 @@ export const validatorKey = (...keys: string[]): any => {
 	return res.includes(true) ? next() : res
 }
 
-export const sizeValidator = (options: Record<string, any>, value: string): boolean | Promise<Error> => {
-	options.size = 1
-	const size = options.size
-	const toJSON = JSON.stringify({ data: value })
-	const bodySize = reqSize(toJSON.length)
+export const sizeValidator = (options: NodeDiskStorageOptions, value: string): boolean | Promise<Error> => {
+	const size: number = options.minSize
+	const toJSON: string = JSON.stringify({ data: value })
+	const bodySize: string = reqSize(toJSON.length)
 	const sizeMatch: string[] = []
 	let MB: string = ''
 
-	for (let i = size + 1; i <= 26; i++) {
+	for (let i = size + 1; i <= options.maxSize; i++) {
 		MB = i + 'MB'
 		sizeMatch.push(MB)
 	}
