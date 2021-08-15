@@ -17,7 +17,7 @@
 ## Installation
 
 ```bash
-$ npm install kinode -S or yarn add kinode -S
+$ npm install nds -S or yarn add nds -S
 ```
 
 ## How It Works
@@ -28,8 +28,8 @@ $ npm install kinode -S or yarn add kinode -S
 
 - #### NDS Options Property
 
-  + **minSize** limit data size, before saving into disk, default value to 1MB
-  + **maxSize** limit data size, before saving into disk, default value to 25MB
+  + **minSize** limit data size, before saving into disk, default value to **1MB**
+  + **maxSize** limit data size, before saving into disk, default value to **25MB**
   + **compress** compress data using gzip, before saving into disk, default value to false
 
 - #### set(key: string, value: string): boolean | undefined
