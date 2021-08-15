@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.com/restuwahyu13/node-disk-storage.svg?branch=main)](https://travis-ci.com/restuwahyu13/node-disk-storage)
 
-**nds** a simple fast and secure `local storage` for `node js`, you can store any data using key and value.
+**nds** a simple fast and secure `local storage` for `nodejs`, you can store any data using key and value.
 
 - [Node Disk Storage](#node-disk-storage)
   - [Installation](#installation)
