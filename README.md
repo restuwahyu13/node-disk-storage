@@ -1,6 +1,6 @@
 # Node Disk Storage
 
-[![Build Status](https://travis-ci.com/restuwahyu13/node-disk-storage.svg?branch=main)](https://travis-ci.com/restuwahyu13/node-disk-storage)
+[![Build Status](https://travis-ci.com/restuwahyu13/node-disk-storage.svg?branch=main)](https://travis-ci.com/restuwahyu13/node-disk-storage) [![Coverage Status](https://coveralls.io/repos/github/restuwahyu13/node-disk-storage/badge.svg?branch=main)](https://coveralls.io/github/restuwahyu13/node-disk-storage?branch=main) [![CodeFactor](https://www.codefactor.io/repository/github/restuwahyu13/node-disk-storage/badge)](https://www.codefactor.io/repository/github/restuwahyu13/node-disk-storage) [![codebeat badge](https://codebeat.co/badges/5611b53e-e00a-40c1-bab2-b9a8f5592b33)](https://codebeat.co/projects/github-com-restuwahyu13-node-disk-storage-main) [![Codacy Badge](https://app.codacy.com/project/badge/Grade/d74af409b71641fb96484df3dc582365)](https://www.codacy.com/gh/restuwahyu13/node-disk-storage/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=restuwahyu13/node-disk-storage&amp;utm_campaign=Badge_Grade)![node-current](https://img.shields.io/node/v/nds?style=flat-square) ![npm](https://img.shields.io/npm/dm/nds) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://github.com/restuwahyu13/node-disk-storage/blob/main/CONTRIBUTING.md)
 
 **nds** a simple fast and secure `local storage` for `nodejs`, you can store any data using key and value.
 
