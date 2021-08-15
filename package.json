@@ -55,7 +55,9 @@
 		"store",
 		"session-storage",
 		"disk-storage",
-		"node"
+		"node",
+		"node-storage",
+		"node-cache"
 	],
 	"dependencies": {
 		"human-size": "^1.1.0",
