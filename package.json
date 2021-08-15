@@ -1,7 +1,7 @@
 {
 	"name": "nds",
 	"version": "0.0.1",
-	"description": "Fast and Secure temporary persistent data for Node JS",
+	"description": "fast and secure local storage persistent data for node js",
 	"main": "./dist/index.js",
 	"files": [
 		"/dist/**"
@@ -36,17 +36,26 @@
 		"npm": ">=5"
 	},
 	"keywords": [
-		"kraken",
-		"kraken-node",
-		"dependency",
-		"dependency injection",
-		"module",
-		"module loader",
-		"kinode",
-		"node_modules",
-		"node",
-		"javascript",
-		"typescript"
+		"nds",
+		"node-disk-storage",
+		"nodejs",
+		"local",
+		"localstorage",
+		"session",
+		"local-storage",
+		"data-store",
+		"persistent-data",
+		"cache-storage",
+		"persistent",
+		"persistent-storage",
+		"cache-storage",
+		"persist",
+		"keyvalue",
+		"keyvaluestore",
+		"store",
+		"session-storage",
+		"disk-storage",
+		"node"
 	],
 	"dependencies": {
 		"human-size": "^1.1.0",
