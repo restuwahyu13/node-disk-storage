@@ -37,7 +37,7 @@ export class NDS implements NodeDiskStorage {
 	}
 
 	/**
-	 * set any data using key and value
+	 * set data using key and value, into disk
 	 *
 	 * @param { String } input - required
 	 * @param { string } value - required
@@ -45,14 +45,14 @@ export class NDS implements NodeDiskStorage {
 	 */
 
 	set(key: string, value: string): boolean | undefined {
-		if (validatorKeyVal({ key, value })) {
+		if (assert.isBoolean(validatorKeyVal({ key, value }))) {
 			const options = {
 				minSize: this.minSize,
 				maxSize: this.maxSize,
 				compress: this.compress
 			}
 
-			if (sizeValidator(options, value)) {
+			if (assert.isBoolean(sizeValidator(options, value) as boolean)) {
 				this.items.push({ key, value })
 				return store.setItem(this.items, options.compress, this.options)
 			}
@@ -60,7 +60,7 @@ export class NDS implements NodeDiskStorage {
 	}
 
 	/**
-	 * get any data by specific key
+	 * get specific data using key, after saving data into disk
 	 *
 	 * @param { String } key - required
 	 * @return string | undefined
@@ -73,7 +73,7 @@ export class NDS implements NodeDiskStorage {
 	}
 
 	/**
-	 * remove any data by specific key
+	 * remove specific data already exist using key, after saving data into disk
 	 *
 	 * @param { String } key - required
 	 * @return boolean | undefined
@@ -86,7 +86,7 @@ export class NDS implements NodeDiskStorage {
 	}
 
 	/**
-	 * clear all key and value exist
+	 * clear all keys exist, after saving data into disk
 	 *
 	 * @return boolean | undefined
 	 */
@@ -96,7 +96,7 @@ export class NDS implements NodeDiskStorage {
 	}
 
 	/**
-	 * get all key exist
+	 * get all keys exist, after saving data into disk
 	 *
 	 * @return string[] | undefined
 	 */
