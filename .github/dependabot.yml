@@ -10,7 +10,7 @@ updates:
       timezone: 'Asia/Jakarta'
     ignore:
       - dependency-name: '*.@types'
-    open-pull-requests-limit: 10
+    open-pull-requests-limit: 30
     versioning-strategy: 'increase-if-necessary'
     commit-message:
       prefix: 'dependencies'
