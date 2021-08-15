@@ -7,8 +7,9 @@
 import { assert } from 'is-any-type'
 import zlib from 'zlib'
 import reqSize from 'human-size'
-import { next } from '../utils/next'
-import { TempStorageError } from '../utils/error'
+import { next } from './next'
+import { TempStorageError } from './error'
+import { matchProperty } from './matchProperty'
 
 interface NodeDiskStorageOptions {
 	minSize: number
@@ -73,4 +74,9 @@ export const sizeValidator = (options: NodeDiskStorageOptions, value: string): b
 			return Promise.reject(new TempStorageError('maximal size under 25 MB'))
 		}
 	}
+}
+
+export const propertyValidator = (options: Record<string, any>): any => {
+	if (assert.isBoolean(matchProperty(options) as boolean)) return true
+	else return Promise.reject(new TempStorageError('Options property not valid'))
 }

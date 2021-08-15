@@ -27,8 +27,10 @@ export class NDS implements NodeDiskStorage {
 	protected maxSize: number
 	protected compress: boolean
 	protected items: Record<string, any>[] = []
+	protected options: Record<string, any>
 
 	constructor(options: Partial<NodeDiskStorageOptions> = {}) {
+		this.options = options
 		this.minSize = (options.minSize as number) || 1
 		this.maxSize = (options.maxSize as number) || 26
 		this.compress = (options.compress as boolean) || false
@@ -41,6 +43,7 @@ export class NDS implements NodeDiskStorage {
 	 * @param { string } value - required
 	 * @return boolean | undefined
 	 */
+
 	set(key: string, value: string): boolean | undefined {
 		if (validatorKeyVal({ key, value })) {
 			const options = {
@@ -51,7 +54,7 @@ export class NDS implements NodeDiskStorage {
 
 			if (sizeValidator(options, value)) {
 				this.items.push({ key, value })
-				return store.setItem(this.items, options.compress)
+				return store.setItem(this.items, options.compress, this.options)
 			}
 		}
 	}
@@ -62,9 +65,10 @@ export class NDS implements NodeDiskStorage {
 	 * @param { String } key - required
 	 * @return string | undefined
 	 */
+
 	get(key: string): string | undefined {
 		if (assert.isBoolean(validatorKey(key))) {
-			return store.getItem(key, this.compress)
+			return store.getItem(key, this.compress, this.options)
 		}
 	}
 
@@ -74,9 +78,10 @@ export class NDS implements NodeDiskStorage {
 	 * @param { String } key - required
 	 * @return boolean | undefined
 	 */
+
 	remove(key: string): boolean | undefined {
 		if (assert.isBoolean(validatorKey(key))) {
-			return store.removeItem(key)
+			return store.removeItem(key, this.options)
 		}
 	}
 
@@ -85,16 +90,18 @@ export class NDS implements NodeDiskStorage {
 	 *
 	 * @return boolean | undefined
 	 */
+
 	clear(): boolean | undefined {
-		return store.clearItem()
+		return store.clearItem(this.options)
 	}
 
 	/**
 	 * get all key exist
 	 *
-	 * @return boolean | undefined
+	 * @return string[] | undefined
 	 */
+
 	keys(): string[] | undefined {
-		return store.keysItem(this.compress)
+		return store.keysItem(this.compress, this.options)
 	}
 }

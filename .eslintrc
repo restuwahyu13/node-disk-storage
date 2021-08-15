@@ -11,7 +11,7 @@
 		"standard"
 	],
 	"rules": {
-		"prettier/prettier": 1,
+		"prettier/prettier": 0,
 		"no-tabs": 0,
 		"indent": 0,
 		"space-before-function-paren": 0,
