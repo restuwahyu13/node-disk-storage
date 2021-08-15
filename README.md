@@ -1,13 +1,13 @@
 # Node Disk Storage
 
-[![Build Status](https://travis-ci.com/restuwahyu13/node-disk-storage.svg?branch=main)](https://travis-ci.com/restuwahyu13/node-disk-storage) [![Coverage Status](https://coveralls.io/repos/github/restuwahyu13/graphql-typedefs-loader/badge.svg?branch=main)](https://coveralls.io/github/restuwahyu13/graphql-typedefs-loader?branch=main) [![codebeat badge](https://codebeat.co/badges/857cbfb1-53a4-41e5-a9a0-38152987a7d4)](https://codebeat.co/projects/github-com-restuwahyu13-graphql-typedefs-loader-main) [![CodeFactor](https://www.codefactor.io/repository/github/restuwahyu13/node-disk-storage/badge)](https://www.codefactor.io/repository/github/restuwahyu13/node-disk-storage) [![Codacy Badge](https://app.codacy.com/project/badge/Grade/d368f0998e7641c4a85a796e7dae3f6a)](https://www.codacy.com/gh/restuwahyu13/node-disk-storage/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=restuwahyu13/node-disk-storage&amp;utm_campaign=Badge_Grade) ![node-current](https://img.shields.io/node/v/gtl-node?style=flat-square) ![npm](https://img.shields.io/npm/dm/node-disk-storage) ![npm bundle size](https://img.shields.io/bundlephobia/min/gtl-node?style=flat-square) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/node-disk-storage?style=flat-square) ![Snyk Vulnerabilities for GitHub Repo](https://img.shields.io/snyk/vulnerabilities/github/restuwahyu13/node-disk-storage)
+[![Build Status](https://travis-ci.com/restuwahyu13/node-disk-storage.svg?branch=main)](https://travis-ci.com/restuwahyu13/node-disk-storage)
 
-**nds** a simple fast and secure `local storage` for `node js`, you can store any data using key and value with very easy.
+**nds** a simple fast and secure `local storage` for `nodejs`, you can store any data using key and value.
 
 - [Node Disk Storage](#node-disk-storage)
   - [Installation](#installation)
-  - [How It Works](#how-it-works)
   - [API Reference](#api-reference)
+  - [How It Works](#how-it-works)
   - [Example Usage](#example-usage)
   - [Testing](#testing)
   - [Bugs](#bugs)
@@ -17,19 +17,14 @@
 ## Installation
 
 ```bash
-$ npm install kinode -S or yarn add kinode -S
+$ npm install nds -S or yarn add nds -S
 ```
-
-## How It Works
-
-<img src="images/nds-work.png" alt="example-nds-work"/>
-
 ## API Reference
 
 - #### NDS Options Property
 
-  + **minSize** limit data size, before saving into disk, default value to 1MB
-  + **maxSize** limit data size, before saving into disk, default value to 25MB
+  + **minSize** limit data size, before saving into disk, default value to **1MB**
+  + **maxSize** limit data size, before saving into disk, default value to **25MB**
   + **compress** compress data using gzip, before saving into disk, default value to false
 
 - #### set(key: string, value: string): boolean | undefined
@@ -47,6 +42,9 @@ $ npm install kinode -S or yarn add kinode -S
 - #### keys(): boolean | undefined
   get all keys exist, after saving data into disk
 
+## How It Works
+
+<img src="images/nds-work.png" alt="example-nds-work"/>
 
 ## Example Usage
 
