@@ -1,6 +1,6 @@
 # Node Disk Storage
 
-[![Build Status](https://travis-ci.com/restuwahyu13/node-disk-storage.svg?branch=main)](https://travis-ci.com/restuwahyu13/node-disk-storage)
+[![Build Status](https://travis-ci.com/restuwahyu13/node-disk-storage.svg?branch=main)](https://travis-ci.com/restuwahyu13/node-disk-storage) [![Coverage Status](https://coveralls.io/repos/github/restuwahyu13/node-disk-storage/badge.svg?branch=main)](https://coveralls.io/github/restuwahyu13/node-disk-storage?branch=main)
 
 **nds** a simple fast and secure `local storage` for `nodejs`, you can store any data using key and value.
 
