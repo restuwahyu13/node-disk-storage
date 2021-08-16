@@ -86,4 +86,23 @@ describe('Kraken Node Group Testing', function () {
 		expect(nds.keys().length).toEqual(0)
 		expect(nds.keys()).toStrictEqual([])
 	})
+
+	it('Should be nds set all value support success', function () {
+		nds.clear()
+		expect(nds.set).toBeDefined()
+		expect(nds.set('name', 'john doe')).toBeTruthy()
+		expect(nds.set('days', ['sunday', 'monday', 'thuesday', 'wenesday'])).toBeTruthy()
+		expect(nds.set('profile', { name: 'john doe', age: 28, hobby: 'swimming' })).toBeTruthy()
+		expect(nds.set('year', 2021)).toBeTruthy()
+		expect(nds.set('active', true)).toBeTruthy()
+	})
+
+	it('Should be nds get all value support success', function () {
+		expect(nds.get).toBeDefined()
+		expect(nds.get('name')).toEqual('john doe')
+		expect(nds.get('days')).toEqual(['sunday', 'monday', 'thuesday', 'wenesday'])
+		expect(nds.get('profile')).toEqual({ name: 'john doe', age: 28, hobby: 'swimming' })
+		expect(nds.get('year')).toEqual(2021)
+		expect(nds.get('active')).toEqual(true)
+	})
 })

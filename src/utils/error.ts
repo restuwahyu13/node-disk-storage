@@ -4,7 +4,7 @@
  * MIT Licensed
  */
 
-export class TempStorageError extends Error {
+export class NodeDiskStorageError extends Error {
 	constructor(message: string) {
 		super(message)
 		this.name = this.constructor.name

@@ -8,7 +8,7 @@ import { assert } from 'is-any-type'
 import zlib from 'zlib'
 import reqSize from 'human-size'
 import { next } from './next'
-import { TempStorageError } from './error'
+import { NodeDiskStorageError } from './error'
 import { matchProperty } from './matchProperty'
 
 interface NodeDiskStorageOptions {
@@ -29,7 +29,7 @@ export const validatorKeyVal = (...data: Record<string, any>[]): any => {
 			assert.isUndefined(v.key) ||
 			assert.isUndefined(v.value)
 		) {
-			return Promise.reject(new TempStorageError('key or value format not supported'))
+			return Promise.reject(new NodeDiskStorageError('key or value format not supported'))
 		} else {
 			return true
 		}
@@ -40,7 +40,7 @@ export const validatorKeyVal = (...data: Record<string, any>[]): any => {
 export const validatorKey = (...keys: string[]): any => {
 	const res = keys.map((v: any) => {
 		if (assert.isFunction(v) || assert.isPromise(v) || assert.isNull(v) || assert.isUndefined(v)) {
-			return Promise.reject(new TempStorageError('key format not supported'))
+			return Promise.reject(new NodeDiskStorageError('key format not supported'))
 		} else {
 			return true
 		}
@@ -65,18 +65,18 @@ export const sizeValidator = (options: NodeDiskStorageOptions, value: string): b
 		sizeMatch.push(MB)
 	}
 	if (sizeMatch.length < 1) {
-		return Promise.reject(new TempStorageError('maximal size under 25 MB'))
+		return Promise.reject(new NodeDiskStorageError('maximal size under 25 MB'))
 	} else {
 		const isCheckSize = sizeMatch.includes(bodySize)
 		if (!isCheckSize) {
 			return next()
 		} else {
-			return Promise.reject(new TempStorageError('maximal size under 25 MB'))
+			return Promise.reject(new NodeDiskStorageError('maximal size under 25 MB'))
 		}
 	}
 }
 
 export const propertyValidator = (options: Record<string, any>): any => {
 	if (assert.isBoolean(matchProperty(options) as boolean)) return true
-	else return Promise.reject(new TempStorageError('Options property not valid'))
+	else return Promise.reject(new NodeDiskStorageError('Options property not valid'))
 }
