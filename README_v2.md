@@ -26,20 +26,21 @@ $ npm install node-disk-storage -S or yarn add node-disk-storage -S
 
   + **minSize** limit data size, before saving into disk, default value to **1MB**
   + **maxSize** limit data size, before saving into disk, default value to **25MB**
+  + **compress** compress data using gzip, before saving into disk, default value to false
 
-- #### set(key: string, value: string): Promise<boolean | undefined>
+- #### set(key: string, value: string): boolean | undefined
   set data using key and value, into disk
 
-- #### get(key: string): Promise<any | undefined>
+- #### get(key: string): any | undefined
   get specific data using key, after saving data into disk
 
-- #### remove(key: string): Promise<boolean | undefined>
+- #### remove(key: string): boolean | undefined
   remove specific data already exist using key, after saving data into disk
 
-- #### clear(): Promise<boolean | undefined>
+- #### clear(): boolean | undefined
   clear all keys exist, after saving data into disk
 
-- #### keys(): Promise<string[] | undefined>
+- #### keys(): boolean | undefined
   get all keys exist, after saving data into disk
 
 ## Example Usage
@@ -51,65 +52,24 @@ $ npm install node-disk-storage -S or yarn add node-disk-storage -S
 
    const nds = new NodeDiskStorage()
 
-   ;(async () => {
-     await nds.set("user", {
-        id: 1,
-        name: 'Leanne Graham',
-        username: 'Bret',
-        email: 'Sincere@april.biz',
-        address: {
-          street: 'Kulas Light',
-          suite: 'Apt. 556',
-          city: 'Gwenborough',
-          zipcode: '92998-3874',
-          geo: { lat: '-37.3159', lng: '81.1496' }
-        },
-        phone: '1-770-736-8031 x56442',
-        website: 'hildegard.org',
-        company: {
-          name: 'Romaguera-Crona',
-          catchPhrase: 'Multi-layered client-server neural-net',
-          bs: 'harness real-time e-markets'
-        }
-      })
-     await nds.get("user")
-     await nds.keys()
-     await nds.remove("user")
-     await nds.clear()
-   })()
+   nds.set("name", "joh doe")
+   nds.get("name")
+   nds.keys()
+   nds.remove("name")
+   nds.clear()
   ```
 - ##### Example Usage Using CommonJs With JavaScript And Options
 
   ```javascript
    const { NodeDiskStorage } = require('node-disk-storage')
 
-   const nds = new NodeDiskStorage({ minSize: 5, maxSize: 30 })
+   const nds = new NodeDiskStorage({ minSize: 5, maxSize: 30, compress: true })
 
-   ;(async () => {
-     await nds.set("user", {
-        id: 1,
-        name: 'Leanne Graham',
-        username: 'Bret',
-        email: 'Sincere@april.biz',
-        address: {
-          street: 'Kulas Light',
-          suite: 'Apt. 556',
-          city: 'Gwenborough',
-          zipcode: '92998-3874',
-          geo: { lat: '-37.3159', lng: '81.1496' }
-        },
-        phone: '1-770-736-8031 x56442',
-        website: 'hildegard.org',
-        company: {
-          name: 'Romaguera-Crona',
-          catchPhrase: 'Multi-layered client-server neural-net',
-          bs: 'harness real-time e-markets'
-        }
-      })
-     await nds.get("user")
-     await nds.keys()
-     await nds.remove("user")
-     await nds.clear()
+   nds.set("name", "joh doe")
+   nds.get("name")
+   nds.keys()
+   nds.remove("name")
+   nds.clear()
   ```
 
 - ##### Example Usage Using ESM With JavaScript
@@ -119,31 +79,11 @@ $ npm install node-disk-storage -S or yarn add node-disk-storage -S
 
    const nds = new NodeDiskStorage()
 
-   ;(async () => {
-     await nds.set("user", {
-        id: 1,
-        name: 'Leanne Graham',
-        username: 'Bret',
-        email: 'Sincere@april.biz',
-        address: {
-          street: 'Kulas Light',
-          suite: 'Apt. 556',
-          city: 'Gwenborough',
-          zipcode: '92998-3874',
-          geo: { lat: '-37.3159', lng: '81.1496' }
-        },
-        phone: '1-770-736-8031 x56442',
-        website: 'hildegard.org',
-        company: {
-          name: 'Romaguera-Crona',
-          catchPhrase: 'Multi-layered client-server neural-net',
-          bs: 'harness real-time e-markets'
-        }
-      })
-     await nds.get("user")
-     await nds.keys()
-     await nds.remove("user")
-     await nds.clear()
+   nds.set("name", "joh doe")
+   nds.get("name")
+   nds.keys()
+   nds.remove("name")
+   nds.clear()
   ```
 
 - ##### Example Usage Using ESM With JavaScript And Options
@@ -151,33 +91,13 @@ $ npm install node-disk-storage -S or yarn add node-disk-storage -S
   ```javascript
    import { NodeDiskStorage } from 'node-disk-storage'
 
-   const nds = new NodeDiskStorage({ minSize: 5, maxSize: 30 })
+   const nds = new NodeDiskStorage({ minSize: 5, maxSize: 30, compress: true })
 
-   ;(async () => {
-     await nds.set("user", {
-        id: 1,
-        name: 'Leanne Graham',
-        username: 'Bret',
-        email: 'Sincere@april.biz',
-        address: {
-          street: 'Kulas Light',
-          suite: 'Apt. 556',
-          city: 'Gwenborough',
-          zipcode: '92998-3874',
-          geo: { lat: '-37.3159', lng: '81.1496' }
-        },
-        phone: '1-770-736-8031 x56442',
-        website: 'hildegard.org',
-        company: {
-          name: 'Romaguera-Crona',
-          catchPhrase: 'Multi-layered client-server neural-net',
-          bs: 'harness real-time e-markets'
-        }
-      })
-     await nds.get("user")
-     await nds.keys()
-     await nds.remove("user")
-     await nds.clear()
+   nds.set("name", "joh doe")
+   nds.get("name")
+   nds.keys()
+   nds.remove("name")
+   nds.clear()
   ```
 
 ## Testing

@@ -11,21 +11,19 @@ import { validatorKey, sizeValidator, validatorKeyVal } from '../utils/validator
 interface NodeDiskStorageOptions {
 	readonly minSize?: number
 	readonly maxSize?: number
-	readonly compress?: boolean
 }
 
 interface NodeDiskStorage {
-	set(key: string, value: string): boolean | undefined
-	get(key: string): string | undefined
-	remove(key: string): boolean | undefined
-	clear(): boolean | undefined
-	keys(): string[] | undefined
+	set(key: string, value: any): Promise<boolean | undefined>
+	get(key: string): Promise<any | undefined>
+	remove(key: string): Promise<boolean | undefined>
+	clear(): Promise<boolean | undefined>
+	keys(): Promise<string[] | undefined>
 }
 
 export class NDS implements NodeDiskStorage {
 	protected minSize: number
 	protected maxSize: number
-	protected compress: boolean
 	protected items: Record<string, any>[] = []
 	protected options: Record<string, any>
 
@@ -33,28 +31,26 @@ export class NDS implements NodeDiskStorage {
 		this.options = options
 		this.minSize = (options.minSize as number) || 1
 		this.maxSize = (options.maxSize as number) || 26
-		this.compress = (options.compress as boolean) || false
 	}
 
 	/**
 	 * set data using key and value, into disk
 	 *
 	 * @param { String } input - required
-	 * @param { string } value - required
-	 * @return boolean | undefined
+	 * @param { any } value - required
+	 * @return Promise<boolean | undefined>
 	 */
 
-	set(key: string, value: string): boolean | undefined {
+	async set(key: string, value: any): Promise<boolean | undefined> {
 		if (assert.isBoolean(validatorKeyVal({ key, value }))) {
-			const options = {
+			const options: any = {
 				minSize: this.minSize,
-				maxSize: this.maxSize,
-				compress: this.compress
+				maxSize: this.maxSize
 			}
 
 			if (assert.isBoolean(sizeValidator(options, value) as boolean)) {
 				this.items.push({ key, value })
-				return store.setItem(this.items, options.compress, this.options)
+				return Promise.resolve(await store.setItem(this.items, this.options))
 			}
 		}
 	}
@@ -63,12 +59,12 @@ export class NDS implements NodeDiskStorage {
 	 * get specific data using key, after saving data into disk
 	 *
 	 * @param { String } key - required
-	 * @return string | undefined
+	 * @return Promise<string | undefined>
 	 */
 
-	get(key: string): string | undefined {
+	async get(key: string): Promise<any | undefined> {
 		if (assert.isBoolean(validatorKey(key))) {
-			return store.getItem(key, this.compress, this.options)
+			return Promise.resolve(await store.getItem(key, this.options))
 		}
 	}
 
@@ -76,32 +72,32 @@ export class NDS implements NodeDiskStorage {
 	 * remove specific data already exist using key, after saving data into disk
 	 *
 	 * @param { String } key - required
-	 * @return boolean | undefined
+	 * @return Promise<boolean | undefined>
 	 */
 
-	remove(key: string): boolean | undefined {
+	async remove(key: string): Promise<boolean | undefined> {
 		if (assert.isBoolean(validatorKey(key))) {
-			return store.removeItem(key, this.options)
+			return Promise.resolve(await store.removeItem(key, this.options))
 		}
 	}
 
 	/**
 	 * clear all keys exist, after saving data into disk
 	 *
-	 * @return boolean | undefined
+	 * @return Promise<boolean | undefined>
 	 */
 
-	clear(): boolean | undefined {
-		return store.clearItem(this.options)
+	async clear(): Promise<boolean | undefined> {
+		return Promise.resolve(await store.clearItem(this.options))
 	}
 
 	/**
 	 * get all keys exist, after saving data into disk
 	 *
-	 * @return string[] | undefined
+	 * @return Promise<string[] | undefined>
 	 */
 
-	keys(): string[] | undefined {
-		return store.keysItem(this.compress, this.options)
+	async keys(): Promise<string[] | undefined> {
+		return Promise.resolve(await store.keysItem(this.options))
 	}
 }

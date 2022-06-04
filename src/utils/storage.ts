@@ -6,92 +6,64 @@
 
 import { assert } from 'is-any-type'
 import { NDSCore } from 'nds-core'
-import { zip, unzip } from './compress'
 import { propertyValidator } from './validator'
-const storage = new NDSCore()
 
-export const setItem = (items: Record<string, any>, compress: boolean, options: Record<string, any>): boolean | undefined => {
+let storage: InstanceType<typeof NDSCore> = new NDSCore()
+
+export const setItem = async (items: Record<string, any>, options: Record<string, any>): Promise<boolean | undefined> => {
 	if (assert.isBoolean(propertyValidator(options))) {
 		if (assert.isArray(items as any)) {
-			if (assert.isUndefined(storage.match() as undefined)) {
-				if (compress !== false) {
-					const zp = zip(items)
-					const uz = unzip(zp)
-					storage.set(uz)
-					return true
-				} else {
-					storage.set(items)
-					return true
-				}
+			if (assert.isUndefined((await storage.match()) as undefined)) {
+				return Promise.resolve(await storage.set(items))
 			} else {
-				if (compress !== false) {
-					const zp = zip(items)
-					const uz = unzip(zp)
-					storage.set(uz)
-					return true
-				} else {
-					storage.set(items)
-					return true
-				}
+				return Promise.resolve(await storage.set(items))
 			}
 		} else {
-			return undefined
+			return Promise.resolve(undefined)
 		}
 	}
 }
 
-export const getItem = (key: string, compress: boolean, options: Record<string, any>): string | undefined => {
+export const getItem = async (key: string, options: Record<string, any>): Promise<string | undefined> => {
 	if (assert.isBoolean(propertyValidator(options))) {
-		const getItem = storage.get(key)
+		const getItem = await storage.get(key)
 		if (!assert.isFunction(getItem) || !assert.isPromise(getItem) || !assert.isNull(getItem) || !assert.isUndefined(getItem)) {
-			if (compress !== false) {
-				const zp = zip(getItem)
-				const uz = unzip(zp)
-				return uz
-			} else {
-				return getItem
-			}
+			return Promise.resolve(getItem)
 		} else {
-			return undefined
+			return Promise.resolve(undefined)
 		}
 	}
 }
 
-export const removeItem = (key: string, options: Record<string, any>): boolean | undefined => {
+export const removeItem = async (key: string, options: Record<string, any>): Promise<boolean | undefined> => {
 	if (assert.isBoolean(propertyValidator(options))) {
-		const removeItem = storage.remove(key)
+		const removeItem = await storage.remove(key)
 		if (assert.isBoolean(removeItem as boolean)) {
-			return removeItem
+			return Promise.resolve(removeItem)
 		} else {
-			return undefined
+			return Promise.resolve(removeItem)
 		}
 	}
 }
 
-export const clearItem = (options: Record<string, any>): boolean | undefined => {
+export const clearItem = async (options: Record<string, any>): Promise<boolean | undefined> => {
 	if (assert.isBoolean(propertyValidator(options))) {
-		const clearItem = storage.clear()
+		const clearItem = await storage.clear()
 		if (assert.isBoolean(clearItem as boolean)) {
-			return clearItem
+			return Promise.resolve(clearItem)
 		} else {
-			return undefined
+			return Promise.resolve(undefined)
 		}
 	}
 }
 
-export const keysItem = (compress: boolean, options: Record<string, any>): string[] | undefined => {
+export const keysItem = async (options: Record<string, any>): Promise<string[] | undefined> => {
 	if (assert.isBoolean(propertyValidator(options))) {
-		const allKeysItem = storage.allKeys()
+		const allKeysItem = await storage.allKeys()
 		if (assert.isArray(allKeysItem as any)) {
-			if (compress !== false) {
-				const zp = zip(getItem)
-				const uz = unzip(zp)
-				return uz
-			} else {
-				return allKeysItem
-			}
+			return Promise.resolve(allKeysItem)
 		} else {
-			return []
+			return Promise.resolve([])
 		}
 	}
 }

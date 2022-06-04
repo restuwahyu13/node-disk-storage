@@ -6,6 +6,6 @@
 	"semi": false,
 	"bracketSpacing": true,
 	"proseWrap": "always",
-	"printWidth": 130,
+	"printWidth": 160,
 	"quoteProps": "consistent"
 }

@@ -5,7 +5,6 @@
  */
 
 import { assert } from 'is-any-type'
-import zlib from 'zlib'
 import reqSize from 'human-size'
 import { next } from './next'
 import { NodeDiskStorageError } from './error'
@@ -14,7 +13,6 @@ import { matchProperty } from './matchProperty'
 interface NodeDiskStorageOptions {
 	minSize: number
 	maxSize: number
-	compress: boolean
 }
 
 export const validatorKeyVal = (...data: Record<string, any>[]): any => {
@@ -49,13 +47,7 @@ export const validatorKey = (...keys: string[]): any => {
 }
 
 export const sizeValidator = (options: NodeDiskStorageOptions, value: string): boolean | Promise<Error> => {
-	let toJSON: string
-
-	if (!options.compress) {
-		toJSON = zlib.gzipSync(Buffer.from(JSON.stringify({ data: value }))).toString('utf-8')
-	} else {
-		toJSON = JSON.stringify({ data: value })
-	}
+	let toJSON: string = JSON.stringify({ data: value })
 
 	const bodySize: string = reqSize(toJSON.length)
 	const sizeMatch: string[] = []
