@@ -27,7 +27,7 @@ $ npm install node-disk-storage -S or yarn add node-disk-storage -S
   + **minSize** limit data size, before saving into disk, default value to **1MB**
   + **maxSize** limit data size, before saving into disk, default value to **25MB**
 
-- #### set(key: string, value: string): Promise<boolean | undefined>
+- #### set(key: string, value: any): Promise<boolean | undefined>
   set data using key and value, into disk
 
 - #### get(key: string): Promise<any | undefined>
