@@ -62,7 +62,7 @@
 	"dependencies": {
 		"human-size": "^1.1.0",
 		"is-any-type": "^0.0.4",
-		"nds-core": "^1.0.9"
+		"nds-core": "^2.0.0"
 	},
 	"devDependencies": {
 		"@types/jest": "^27.5.2",
