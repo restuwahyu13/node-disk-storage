@@ -4,3 +4,4 @@ app
 dist
 esm
 config
+index.js
