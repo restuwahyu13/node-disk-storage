@@ -17,25 +17,19 @@ describe('Node Disk Storage Group Testing', function () {
 		expect(await nds.set('age', 23)).toBeTruthy()
 	})
 
-	it('Should be nds get is success', () => {
-		setTimeout(async () => {
-			expect(nds.get).toBeDefined()
-			expect(await nds.get('name')).toEqual('john doe')
-		}, 500)
+	it('Should be nds get is success', async (): Promise<void> => {
+		expect(nds.get).toBeDefined()
+		expect(await nds.get('name')).toEqual('john doe')
 	})
 
-	it('Should be nds keys is success', () => {
-		setTimeout(async () => {
-			expect(nds.keys).toBeDefined()
-			expect(await nds.keys()).toBeInstanceOf(Array)
-			expect((await nds.keys()).length).toBe(2)
-		}, 500)
+	it('Should be nds keys is success', async (): Promise<void> => {
+		expect(nds.keys).toBeDefined()
+		expect(await nds.keys()).toBeInstanceOf(Array)
+		expect((await nds.keys()).length).toBe(2)
 	})
 
-	it('Should be nds remove is success', () => {
-		setTimeout(async () => {
-			expect(nds.remove).toBeDefined()
-			expect(await nds.remove('name')).toBeTruthy()
-		}, 500)
+	it('Should be nds remove is success', async (): Promise<void> => {
+		expect(nds.remove).toBeDefined()
+		expect(await nds.remove('name')).toBeTruthy()
 	})
 })

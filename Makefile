@@ -50,9 +50,5 @@ install:
 ## BUILD AUTOMATION
 #########################
 
-build: testc.o compile.o
-testc.o:
-	${NPM} ${NPM_FLAGS} test:coveralls
-
-compile.o:
+build:
 	${NPM} ${NPM_FLAGS} build
