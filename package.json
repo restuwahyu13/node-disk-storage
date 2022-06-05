@@ -13,7 +13,7 @@
 		"test": "jest",
 		"test:coverage": "jest --coverage",
 		"test:watch": "jest --watchAll",
-		"test:coveralls": "jest --coverage && coveralls < coverage/lcov.info",
+		"test:coveralls": "npm run build && jest --coverage && coveralls < coverage/lcov.info",
 		"lint": "eslint src/**/*.ts --fix",
 		"format": "prettier src/**/*.ts --write",
 		"lint:fix": "npm run format && npm run lint"
