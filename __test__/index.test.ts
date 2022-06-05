@@ -31,7 +31,7 @@ describe('Node Disk Storage Group Testing', function () {
 		await nds.set('age', '23')
 		expect(nds.keys).toBeDefined()
 		expect(await nds.keys()).toBeInstanceOf(Array)
-		expect(await nds.keys()).toStrictEqual(['name', 'age'])
+		expect(await nds.keys()).toStrictEqual(['age'])
 	})
 
 	it('Should be nds clear is success', async () => {
