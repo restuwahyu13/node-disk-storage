@@ -3,7 +3,7 @@ import { NodeDiskStorage } from '../src/'
 describe('Node Disk Storage Group Testing', function () {
 	let nds
 
-	beforeAll(() => {
+	beforeAll(async () => {
 		nds = new NodeDiskStorage()
 	})
 
@@ -31,7 +31,7 @@ describe('Node Disk Storage Group Testing', function () {
 		await nds.set('age', '23')
 		expect(nds.keys).toBeDefined()
 		expect(await nds.keys()).toBeInstanceOf(Array)
-		expect(await nds.keys()).toStrictEqual(['age'])
+		expect(await nds.keys()).toStrictEqual(['name', 'age'])
 	})
 
 	it('Should be nds clear is success', async () => {
