@@ -28,6 +28,12 @@ describe('Node Disk Storage Group Testing', function () {
 		expect((await nds.keys()).length).toBe(0)
 	})
 
+	it('Should be nds remove is failed', async (): Promise<void> => {
+		expect(nds.remove).toBeDefined()
+		expect(await nds.remove('name')).toBeFalsy()
+		expect(await nds.remove('age')).toBeFalsy()
+	})
+
 	it('Should be nds set is success', async (): Promise<void> => {
 		expect(nds.set).toBeDefined()
 		expect(await nds.set('name', 'john doe')).toBeTruthy()
@@ -54,5 +60,6 @@ describe('Node Disk Storage Group Testing', function () {
 	it('Should be nds remove is success', async (): Promise<void> => {
 		expect(nds.remove).toBeDefined()
 		expect(await nds.remove('name')).toBeTruthy()
+		expect(await nds.remove('age')).toBeTruthy()
 	})
 })
