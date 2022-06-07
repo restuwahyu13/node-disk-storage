@@ -11,6 +11,23 @@ describe('Node Disk Storage Group Testing', function () {
 		await nds.clear()
 	})
 
+	it('Should be nds get is failed', async (): Promise<void> => {
+		expect(nds.get).toBeDefined()
+		expect(await nds.get('name')).toBeUndefined()
+	})
+
+	it('Should be nds keys is failed', async (): Promise<void> => {
+		expect(nds.keys).toBeDefined()
+		expect(await nds.key('name')).toBeUndefined()
+		expect(await nds.key('age')).toBeUndefined()
+	})
+
+	it('Should be nds all keys is failed', async (): Promise<void> => {
+		expect(nds.keys).toBeDefined()
+		expect(await nds.keys()).toBeInstanceOf(Array)
+		expect((await nds.keys()).length).toBe(0)
+	})
+
 	it('Should be nds set is success', async (): Promise<void> => {
 		expect(nds.set).toBeDefined()
 		expect(await nds.set('name', 'john doe')).toBeTruthy()
@@ -22,7 +39,13 @@ describe('Node Disk Storage Group Testing', function () {
 		expect(await nds.get('name')).toEqual('john doe')
 	})
 
-	it('Should be nds keys is success', async (): Promise<void> => {
+	it('Should be nds key is success', async (): Promise<void> => {
+		expect(nds.get).toBeDefined()
+		expect(await nds.key('name')).toEqual('name')
+		expect(await nds.key('age')).toEqual('age')
+	})
+
+	it('Should be nds all keys is success', async (): Promise<void> => {
 		expect(nds.keys).toBeDefined()
 		expect(await nds.keys()).toBeInstanceOf(Array)
 		expect((await nds.keys()).length).toBe(2)

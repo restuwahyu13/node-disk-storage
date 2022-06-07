@@ -17,6 +17,7 @@ interface NodeDiskStorage {
 	set(key: string, value: any): Promise<boolean | undefined>
 	get(key: string): Promise<any | undefined>
 	remove(key: string): Promise<boolean | undefined>
+	key(key: string): Promise<boolean | undefined>
 	clear(): Promise<boolean | undefined>
 	keys(): Promise<string[] | undefined>
 }
@@ -82,6 +83,18 @@ export class NDS implements NodeDiskStorage {
 	}
 
 	/**
+	 * get specific keys exist, after saving data into disk
+	 * @param { String } key - required
+	 * @return Promise<boolean | undefined>
+	 */
+
+	async key(key: string): Promise<boolean | undefined> {
+		if (assert.isBoolean(validatorKey(key))) {
+			return Promise.resolve(await store.keysItem(key, this.options))
+		}
+	}
+
+	/**
 	 * clear all keys exist, after saving data into disk
 	 *
 	 * @return Promise<boolean | undefined>
@@ -98,6 +111,6 @@ export class NDS implements NodeDiskStorage {
 	 */
 
 	async keys(): Promise<string[] | undefined> {
-		return Promise.resolve(await store.keysItem(this.options))
+		return Promise.resolve(await store.allKeysItem(this.options))
 	}
 }

@@ -42,7 +42,7 @@ export const removeItem = async (key: string, options: Record<string, any>): Pro
 		if (removeItem) {
 			return Promise.resolve(removeItem)
 		} else {
-			return Promise.resolve(removeItem)
+			return Promise.resolve(false)
 		}
 	}
 }
@@ -53,18 +53,29 @@ export const clearItem = async (options: Record<string, any>): Promise<any> => {
 		if (clearItem) {
 			return Promise.resolve(clearItem)
 		} else {
-			return Promise.resolve(clearItem)
+			return Promise.resolve(false)
 		}
 	}
 }
 
-export const keysItem = async (options: Record<string, any>): Promise<any> => {
+export const allKeysItem = async (options: Record<string, any>): Promise<any> => {
 	if (assert.isBoolean(propertyValidator(options))) {
 		const allKeysItem: string[] = await storage.allKeys()
 		if (allKeysItem.length > 0) {
 			return Promise.resolve(allKeysItem)
 		} else {
-			return Promise.resolve(allKeysItem)
+			return Promise.resolve([])
+		}
+	}
+}
+
+export const keysItem = async (key: string, options: Record<string, any>): Promise<any> => {
+	if (assert.isBoolean(propertyValidator(options))) {
+		const keyItem: any = await storage.keys(key)
+		if (!assert.isFunction(keyItem) || !assert.isPromise(keyItem) || !assert.isNull(keyItem) || !assert.isUndefined(keyItem)) {
+			return Promise.resolve(keyItem)
+		} else {
+			return Promise.resolve(undefined)
 		}
 	}
 }
