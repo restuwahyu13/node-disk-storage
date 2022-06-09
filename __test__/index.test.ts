@@ -11,6 +11,11 @@ describe('Node Disk Storage Group Testing', function () {
 		await nds.clear()
 	})
 
+	it('Should be nds cleanup is failed', async (): Promise<void> => {
+		expect(nds.clear).toBeDefined()
+		expect(await nds.clear()).toBeFalsy()
+	})
+
 	it('Should be nds get is failed', async (): Promise<void> => {
 		expect(nds.get).toBeDefined()
 		expect(await nds.get('name')).toBeUndefined()
