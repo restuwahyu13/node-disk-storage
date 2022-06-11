@@ -54,8 +54,8 @@ describe('Node Disk Storage Group Testing', function () {
 		expect(await nds.set('string', 'john doe')).toBeTruthy()
 		expect(await nds.set('number', 23)).toBeTruthy()
 		expect(await nds.set('boolean', true)).toBeTruthy()
-		expect(await nds.set('array'), [1,2,3,4,5])).toBeTruthy()
-		expect(await nds.set('object'), {name: "john doe"})).toBeTruthy()
+		expect(await nds.set('array', [1,2,3,4,5])).toBeTruthy()
+		expect(await nds.set('object', {name: "john doe"})).toBeTruthy()
 	})
 
 	it('Should be nds get is success', async (): Promise<void> => {
